@@ -167,7 +167,7 @@ jobs:
           command: |
             # Install dependencies needed for your playbook
             apk add --update ansible
-            - image: amazon/aws-cli
+            apk add --no-cache aws-cli
       - run:
           name: Configure server
           command: |
