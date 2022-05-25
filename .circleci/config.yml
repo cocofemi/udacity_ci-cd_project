@@ -168,15 +168,11 @@ jobs:
             # Install dependencies needed for your playbook
             apk add --update ansible
             # apk add python curl
-            # curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-            # unzip awscli-bundle.zip
-            # ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
       - run:
           name: Configure server
           command: |
             cd .circleci/ansible
-            ansible-playbook -i inventory.txt configure-server.yml
-      # - destroy-environment     
+            ansible-playbook -i inventory.txt configure-server.yml    
 
   run-migrations:
     docker:
@@ -197,8 +193,7 @@ jobs:
             then
               curl https://kvdb.io/Y2KNsbnjNygvrpLpYzaqxu/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
 
-            fi
-      - destroy-environment    
+            fi  
 
   deploy-frontend:
     docker:
