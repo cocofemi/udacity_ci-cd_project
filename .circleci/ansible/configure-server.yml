@@ -35,5 +35,4 @@
 
   roles:
     - setup
-    - python
     - node
