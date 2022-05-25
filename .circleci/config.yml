@@ -210,10 +210,22 @@ jobs:
           command: |
             node/install-packages
             apk add --update ansible
+            apk add --update nodejs npm
+            apk add --update python 
+      - attach_workspace:
+          at: ~/
+          paths:
+            - project/.circleci/ansible/inventory.txt
       - run:
           name: Get backend url
           command: |
-            export API_URL="http://${44.203.170.75}:3030"
+            export BACKEND_IP=$(
+              aws ec2 describe-instances \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --filters "Name=tag:project,Values=udapeople" \
+              --output text >> inventory
+            )
+            export API_URL="http://${BACKEND_IP}:3030"
             echo "${API_URL}"
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
             cat frontend/.env
@@ -322,10 +334,10 @@ workflows:
               only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
-      # - run-migrations:
-      #     requires: [configure-infrastructure]
-      # - deploy-frontend:
-      #     requires: [run-migrations]
+      - run-migrations:
+          requires: [configure-infrastructure]
+      - deploy-frontend:
+          requires: [run-migrations]
       # - deploy-backend:
       #     requires: [run-migrations]
       # - smoke-test:
