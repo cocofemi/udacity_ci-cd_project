@@ -237,7 +237,7 @@ jobs:
             npm install
             npm run build
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
-            aws s3 cp dist s3://udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7} --recursive
+            aws s3 cp dist s3://udapeoplefrontend-${CIRCLE_WORKFLOW_ID:0:7} --recursive
       - destroy-environment      
                     
   deploy-backend:
@@ -249,7 +249,6 @@ jobs:
           fingerprints: ["87:ad:56:da:6a:94:b9:cb:39:58:25:dc:20:ab:d8:43"]
       - attach_workspace:
           at: ~/
-      - run: yum install -y tar gzip
       - run:
           name: Install dependencies
           command: |
