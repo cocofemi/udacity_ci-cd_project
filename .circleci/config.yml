@@ -210,7 +210,6 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/
-      - run: yum install -y tar gzip
       - run:
           name: Install AWS CLI dependencies
           command: |
@@ -243,20 +242,21 @@ jobs:
                     
   deploy-backend:
     docker:
-      - image: amazon/aws-cli
+      - image: python:3.7-alpine3.11
     steps:
       - checkout 
       - add_ssh_keys: 
           fingerprints: ["87:ad:56:da:6a:94:b9:cb:39:58:25:dc:20:ab:d8:43"]
       - attach_workspace:
           at: ~/
+      - run: yum install -y tar gzip
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansible
-            apk add --update nodejs npm
-            apk add --update python 
-            yum install -y tar gzip
+            apk add --update ansiblen odejs npm
+            ansible --version
+            pip install awscli
+            aws --version
       - run:
           name: Deploy backend
           command: |
@@ -273,7 +273,7 @@ jobs:
 
   smoke-test:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: python:3.7-alpine3.11 
     steps:
       - checkout
       - run:
