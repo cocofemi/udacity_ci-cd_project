@@ -165,7 +165,7 @@ jobs:
           command: |
             # Install dependencies needed for your playbook
             apk add --update ansible
-            # apk add python curl
+            yum install -y tar gzip
       - run:
           name: Configure server
           command: |
