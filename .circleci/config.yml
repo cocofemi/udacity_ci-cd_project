@@ -252,7 +252,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansiblen odejs npm
+            apk add --update ansible nodejs npm
             ansible --version
             pip install awscli
             aws --version
@@ -377,8 +377,8 @@ workflows:
           requires: [configure-infrastructure]
       - deploy-frontend:
           requires: [run-migrations]
-      # - deploy-backend:
-      #     requires: [run-migrations]
+      - deploy-backend:
+          requires: [run-migrations]
       # - smoke-test:
       #     requires: [deploy-backend, deploy-frontend]
       # - cloudfront-update:
