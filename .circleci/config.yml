@@ -189,8 +189,9 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            # npm cache clean --force
-            # npm install
+            npm cache clean --force
+            rm -rf node_modules
+            npm install
             # Run and save the migration output
             npm run migrations > migration_status
       - run:
