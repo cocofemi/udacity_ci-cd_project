@@ -161,9 +161,9 @@ jobs:
           root: .
           paths:
             - ./.circleci/ansible/inventory.txt
-       - attach_workspace:
-          at: .
-
+      - attach_workspace:
+        at: .
+        
       - run: 
           name: View content of inventory.txt
           command: cat .circleci/ansible/inventory.txt 
