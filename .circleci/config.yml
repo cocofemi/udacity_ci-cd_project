@@ -29,10 +29,9 @@ commands:
           when: on_fail
           command: |
             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            sudo apt-get update && sudo apt-get install -y ca-certificates
             SUCCESS=$(curl --insecure https://kvdb.io/Y2KNsbnjNygvrpLpYzaqxu/migration_<< parameters.workflow_id >>)
-            SUCCESS = 1
-            if(( $SUCCESS==1 )); 
+            echo $SUCCESS
+            if(( $SUCCESS == "success" )); 
             then
               cd ~/project/backend
               npm install
