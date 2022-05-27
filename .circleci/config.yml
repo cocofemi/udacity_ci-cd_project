@@ -150,8 +150,9 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:project,Values=udapeople" \
               --output text >> inventory
+            cat inventory
       - persist_to_workspace:
-          root: ~/
+          root: .
           paths:
             - .circleci/ansible/inventory.txt
       - destroy-environment:
@@ -165,8 +166,7 @@ jobs:
       - add_ssh_keys: 
           fingerprints: ["87:ad:56:da:6a:94:b9:cb:39:58:25:dc:20:ab:d8:43"]
       - attach_workspace:
-          at: ~/
-
+          at: .
       - run:
           name: Install dependencies
           command: |
@@ -184,7 +184,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: .
       - run:
           name: Install AWS CLI dependencies
           command: |
@@ -217,7 +217,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: .
       - run:
           name: Install AWS CLI dependencies
           command: |
@@ -295,7 +295,7 @@ jobs:
             apk add --update curl nodejs npm
             pip install awscli 
       - attach_workspace:
-          at: ~/  
+          at: . 
       - run:
           name: Get backend url
           command: |
