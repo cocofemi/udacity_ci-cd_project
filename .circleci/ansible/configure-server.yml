@@ -36,3 +36,4 @@
   roles:
     - python 
     - node
+    - configure-prometheus-node-exporter
