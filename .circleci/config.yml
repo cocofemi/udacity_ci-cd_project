@@ -149,7 +149,7 @@ jobs:
             aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:project,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --output text >> inventory
+              --output text >> .circleci/ansible/inventory.txt
 
             # BACKEND_IP=$(aws ec2 describe-instances \
             #   --query 'Reservations[*].Instances[*].PublicIpAddress' \
