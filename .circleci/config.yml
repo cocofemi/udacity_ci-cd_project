@@ -167,11 +167,16 @@ jobs:
           fingerprints: ["87:ad:56:da:6a:94:b9:cb:39:58:25:dc:20:ab:d8:43"]
       - attach_workspace:
           at: ~/.circleci/ansible/inventory.txt
+      - run:
+          name: Install AWS CLI dependencies
+          command: |
+            sudo apt-get update && sudo apt-get install -yy less
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
       - run: 
           name: View content of inventory.txt
-          command: 
-            cd .circleci/ansible
-            cat inventory.txt
+          command: cat .circleci/ansible/inventory.txt 
       - run:
           name: Install dependencies
           command: |
@@ -181,7 +186,9 @@ jobs:
           name: Configure server
           command: |
             cd .circleci/ansible
-            ansible-playbook -i inventory.txt configure-server.yml    
+            ansible-playbook -i inventory.txt configure-server.yml 
+      - destroy-environment:
+          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}    
 
   run-migrations:
     docker:
