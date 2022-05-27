@@ -162,8 +162,7 @@ jobs:
           paths:
             - ./.circleci/ansible/inventory.txt
       - attach_workspace:
-        at: .
-        
+          at: ~/
       - run: 
           name: View content of inventory.txt
           command: cat .circleci/ansible/inventory.txt 
