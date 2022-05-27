@@ -169,7 +169,9 @@ jobs:
           at: ~/.circleci/ansible/inventory.txt
       - run: 
           name: View content of inventory.txt
-          command: cat ~/inventory.txt
+          command: 
+            cd .circleci/ansible
+            cat inventory.txt
       - run:
           name: Install dependencies
           command: |
