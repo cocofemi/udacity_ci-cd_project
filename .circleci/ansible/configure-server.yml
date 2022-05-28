@@ -1,6 +1,5 @@
 ---
-
-- name: "configuration play." 
+- name: "Comfigure udapeople infrastructure." 
   hosts: web
   user: ubuntu
   become: true
@@ -35,5 +34,6 @@
 
   roles:
     # - python 
+    - configure-server
     - node
     - configure-prometheus-node-exporter
