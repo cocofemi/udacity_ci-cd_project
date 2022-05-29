@@ -295,6 +295,8 @@ jobs:
       - image: python:3.7-alpine3.11 
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/.circleci/ansible/inventory.txt
       - run:
           name: Install dependencies
           command: |
@@ -317,7 +319,8 @@ jobs:
             export BACKEND_IP=$(
               aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters "Name=tag:project,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}"
+              --filters "Name=tag:project,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --output text >> inventory
             )
             echo "${BACKEND_IP}"
             export API_URL="http://${BACKEND_IP}:3030" 
