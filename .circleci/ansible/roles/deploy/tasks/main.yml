@@ -12,17 +12,17 @@
 
   - name: "copy backend binaries"
     become: yes
-    copy:
+    synchronize:
       src: ../../backend/dist
       dest: /home/ubuntu/uda_app
-      # recursive: true
+      recursive: true
 
   - name: "copy node_modules"
     become: yes
-    copy:
+    synchronize:
       src: ../../backend/node_modules
       dest: /home/ubuntu/uda_app
-      # recursive: true
+      recursive: true
 
   - name: "delete anything that might already be running"
     become: true
