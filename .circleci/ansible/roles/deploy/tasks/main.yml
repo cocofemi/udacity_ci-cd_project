@@ -2,12 +2,12 @@
   - name: "show remote environment"
     shell: env
 
-  - name: install rsync on the ansible controller
-    become: yes
-    connection: local
-    package:
-      name: rsync
-      state: present
+  # - name: install rsync on the ansible controller
+  #   become: yes
+  #   connection: local
+  #   package:
+  #     name: rsync
+  #     state: present
 
   - name: "copy backend binaries"
     become: yes
