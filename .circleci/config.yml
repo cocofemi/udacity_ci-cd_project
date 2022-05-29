@@ -265,7 +265,10 @@ jobs:
       - add_ssh_keys: 
           fingerprints: ["87:ad:56:da:6a:94:b9:cb:39:58:25:dc:20:ab:d8:43"]
       - attach_workspace:
-          at: ~/.circleci/ansible/inventory.txt
+          at: .
+      - run: 
+          name: View content of inventory.txt
+          command: cat .circleci/ansible/inventory.txt 
       - run:
           name: Install dependencies
           command: |
@@ -283,7 +286,7 @@ jobs:
             tar -C backend -czvf artifact.tar.gz .
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"
-            cat inventory.txt
+            cat .circleci/ansible/inventory.txt 
             ansible-playbook -i inventory.txt deploy-backend.yml  
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
