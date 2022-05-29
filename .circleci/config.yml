@@ -238,7 +238,7 @@ jobs:
               aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:project,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --output text
+              --output text >> inventory
             )
             export API_URL="http://${BACKEND_IP}:3030"
             echo "${API_URL}"
@@ -320,7 +320,7 @@ jobs:
               aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:project,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --output text > ${}
+              --output text
             )
             echo "${BACKEND_IP}"
             export API_URL="http://${BACKEND_IP}:3030" 
