@@ -57,6 +57,3 @@ Before you submit your project, please check your work against the project rubri
 ### License
 
 [License](LICENSE.md)
-
-#CircleCi
-[![CircleCI](https://circleci.com/gh/cocofemi/udacity_ci-cd_project/tree/master.svg?style=svg)](https://circleci.com/gh/cocofemi/udacity_ci-cd_project/tree/master)
