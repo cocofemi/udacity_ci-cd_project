@@ -113,7 +113,7 @@ jobs:
     steps:
       - checkout 
       - run: 
-          name: Scan Front-end
+          name: Scan Back-end
           command: |
             cd backend
             npm install
@@ -236,7 +236,7 @@ jobs:
               aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:project,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --output text >> inventory
+              --output text
             )
             export API_URL="http://${BACKEND_IP}:3030"
             echo "${API_URL}"
